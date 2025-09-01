@@ -1,0 +1,10 @@
+jobs:
+  notify:
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_MSG_TEXT: "Build failed in ${GITHUB_WORKFLOW} at ${GITHUB_SHA}"
